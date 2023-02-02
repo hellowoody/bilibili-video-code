@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" >
+        <title>LCG-线性同余法</title>
+        <style>
+            h1,h2,p {
+                color:#333;
+            }
+
+            input {
+                width: 30px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Linear congruential generator</h1>
+        <h2>LCG-线性同余法</h2>
+        <h2>公式: R = (a*Ri + b) % c</h2>
+        <p>其中a b c是随机常量,Ri是获取次数</p>
+        <div>
+            (
+            <input id="a" type="number">
+            *
+            <input id="count" type="number">
+            +
+            <input id="b" type="number">
+            )
+            %
+            <input id="c" type="number">
+            =
+            <span id="res"></span>
+            <button onclick="getRes()">计算</button>
+            <button onclick="updateSeed()">修改seed伪随机数种子</button>
+        </div>
+        <h3>结果</h3>
+        <p id="history"></p>
+    </body>
+</html>
+<script>
+let count = 0,
+    a = 5,
+    b = 3,
+    c = 8;
+
+function init(){
+    document.getElementById("a").value = a
+    document.getElementById("b").value = b
+    document.getElementById("c").value = c
+    document.getElementById("count").value = count
+}
+
+init()
+
+function getRes(){
+    const a = document.getElementById("a").value,
+            b = document.getElementById("b").value,
+            c = document.getElementById("c").value;
+    const res = (a*count + b) % c 
+    document.getElementById("res").innerHTML = res
+    count++
+    document.getElementById("history").innerHTML += res + (count % c === 0 ? " / " : " " )
+    document.getElementById("count").value = count
+}
+
+function updateSeed(){
+    count = 0;
+    a = Math.floor(Math.random()*5+1);
+    b = Math.floor(Math.random()*5+10);
+    c = a*2+1;   // c 如果是a的整数倍 那么循环的周期就是c/a个，所以尽量不让c能整除a
+    document.getElementById("history").innerHTML = ""
+    init()
+}
+</script>
