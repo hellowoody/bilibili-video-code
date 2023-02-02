@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>pseudo-elements</title>
+        <style>
+            /*
+                1.伪元素和伪类
+                    ::伪元素 after before backdrop cue first-letter placeholder
+                    : 伪类 hover focus link visited 等
+                 css3 标准下将伪元素和伪类用单双冒号区分
+                
+                2.伪元素的最初的目的
+
+                3.伪元素before after绘制时的顺序和位置
+            */
+            
+            span {
+                color:red;
+                position: relative;
+            }
+
+            span::before {
+                content:"<<";
+                color:green;
+                position: absolute;
+                width: 50px;
+                background-color: pink;
+                top:20px;
+            }
+
+            span::after {
+                content:">>";
+                color:blue;
+                position: absolute;
+                height:30px;
+                background-color: purple;
+                left: 0;
+                top:-10px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>伪元素 pseudo-elements</h1>
+        book: <<ring of king>> <br/>
+        book: &lt;&lt;ring of king&gt;&gt; <br/>
+        book: <span>ring of king</span>
+    </body>
+</html>
