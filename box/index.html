@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" >
+        <title>盒子模型</title>
+        <style>
+            /*
+                盒子模型
+
+                    box-sizing 默认值是 content-box
+
+                    content-box 表示 width 和 height 是content区域的宽高
+
+                    border-box  表示 width 和 height 是border 区域的宽高 （是border，padding以及content三个区域的总和）
+            */
+
+            div {
+                display:inline-block;
+                height:100px;
+                width:100px;
+                vertical-align: bottom;
+            }
+
+            .box-content {
+                background: red;
+            }
+
+            .box-padding {
+                background: blue;
+                padding:10px;
+            }
+            .box-border {
+                background: green;
+                padding:10px;
+                border:10px solid #333;
+            }
+
+            .box-1 {
+                width:200px;
+                height:200px;
+                background: pink;
+            }
+
+            .box-2 {
+                width:200px;
+                height:200px;
+                background: pink;
+                padding:30px;
+                box-sizing: content-box; /* content-box 是默认值 */
+            }
+
+            .box-3 {
+                width:200px;
+                height:200px;
+                background: pink;
+                padding:30px;
+                box-sizing: border-box; 
+            }
+            
+        </style>
+    </head>
+    <body>
+        <h1>content-box 模式下的盒子模型</h1>
+        <div class="box-content"></div>
+        <div class="box-padding"></div>
+        <div class="box-border"></div>
+        <h1>border-box 模式下的盒子模型</h1>
+        <div class="box-1">
+            没有内边距
+        </div>
+        <div class="box-2">
+            content-box 模式下的增加内边距
+        </div>
+        <div class="box-3">
+            border-box 模式下的增加内边距
+        </div>
+    </body>
+</html>
