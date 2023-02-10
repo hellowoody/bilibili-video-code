@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>情人节</title>
+        <style>
+            body {
+                margin:0;
+            }
+            .container {
+                height: 100vh;
+                background: #fae1dd;
+                display:flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                position: relative;
+            }
+
+            .valentine {
+                position: relative;
+                animation: up 3s linear infinite;
+                cursor: pointer;
+            }
+
+            @keyframes up {
+                0%,100% {
+                    transform: translateY(0);
+                }
+                50%{
+                    transform: translateY(-50px);
+                }
+            }
+
+            .envelope {
+                width:450px;
+                height:300px;
+                background-color: #f08080;
+                position: relative;
+            }
+
+            .envelope::before {
+                content:"";
+                width:318px;
+                height:318px;
+                background-color: #f08080;
+                position: absolute;
+                transform: rotate(-45deg);
+                transform-origin: 0 0;
+                border-top-right-radius: 30px;
+            }
+
+            .front {
+                width:0;
+                height:0;
+                border-top:143px solid transparent;
+                border-bottom:150px solid transparent;
+                border-right:270px solid #f4978e;
+                position: absolute;
+                top:6px;
+                left:180px;
+            }
+
+            .front::before {
+                content:"";
+                position: absolute;
+                width:0;
+                height: 0;
+                border-top:293px solid transparent;
+                border-left:450px solid #f8ad9d;
+                top:-142px;
+                left:-180px;
+            }
+
+            .card {
+                width:410px;
+                height:255px;
+                background-color: #eae2b7;
+                position: absolute;
+                top:6px;
+                left:20px;
+                box-shadow: -5px -5px 100px rgb(0 0 0 / 0.4);
+            }
+
+            .txt {
+                padding:30px;
+                font-size:16px;
+                color:#003049;
+            }
+
+            .content {
+                margin-left:20px;
+                margin-top:20px;
+                font-size: 20px;
+            }
+
+            .shadow {
+                width:495px;
+                height:38px;
+                background: rgb( 0 0 0 / 0.3);
+                position: absolute;
+                bottom:120px;
+                border-radius: 50%;
+                animation: shadow-size 3s linear infinite;
+            }
+
+            @keyframes shadow-size {
+                0%,100%{ 
+                    transform: scaleX(1);
+                }
+                50% {
+                    transform: scaleX(0.85);
+                }
+            }
+        </style>
+        <script src="./jquery.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="valentine">
+                <div class="envelope"></div>
+                <div class="card">
+                    <div class="txt"></div>
+                </div>
+                <div class="front"></div>
+            </div>
+            <div class="shadow"></div>
+        </div>
+    </body>
+</html>
+<script>
+$(".valentine").mouseenter(() => {
+    $(".card").stop().animate({
+        top:"-90px"
+    },"slow")
+    typewriter()
+})
+$(".valentine").mouseleave(() => {
+    $(".card").stop().animate({
+        top:0
+    },"slow")
+})
+
+function typewriter(){
+    const el = $(".txt")
+    const str = `你好2023:
+        <div class="content">2月14日情人节快乐。。。</div>
+    `
+
+    let progress = 0
+    const timer = setInterval(() => {
+        const curr = str.substr(progress,1)
+        if(curr === "<"){
+            progress = str.indexOf(">",progress) + 1
+        }else{
+            progress++
+        }
+        el.html(str.substring(0,progress) + (progress & 1 ? "_ " : ""))
+        if(progress > str.length){
+            clearInterval(timer)
+        }
+    },100) 
+}
+</script>
