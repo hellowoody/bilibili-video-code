@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>AI finger game - 智能猜拳</title>
+    </head>
+    <body>
+        <h1>AI finger game - 智能猜拳</h1>
+        <input placeholder="0-石头;1-剪刀;2-布" id="human" type="number">
+        <span>VS</span>
+        <span>AI</span>
+        <button onclick="start()">start</button>
+        <ul id="history"></ul>
+    </body>
+</html>
+<script>
+/*
+0 - 石头
+1 - 剪刀
+2 - 布
+
+构建一个二位数组 - 充当“gtp”的数据模型
+[
+    [0,0,0],
+    [0,0,0],
+    [0,0,0]
+]
+
+人的前一次出手情况                     人本次出手情况
+                        出手石头的次数   出手剪刀的次数     出手布的次数
+    0 - 石头           [     0,               0,            0        ]
+    1 - 剪刀           [     0,               0,            0        ]
+    2 - 布             [     0,               0,            0        ]
+*/
+const memory = [
+    [0,0,0],
+    [0,0,0],
+    [0,0,0]
+]
+
+let human,
+    ai,
+    prev = 0,
+    predict,
+    count = 0;
+
+function start(){
+    if(count < 10){
+        // 低于10次时，random 随机出手
+        ai = Math.floor(Math.random()*3) // [0,3)  0 1 2
+    }else{
+        console.table(memory)
+    }
+
+    human = parseInt(document.getElementById("human").value,10)
+    // 记录人类出手的信息
+    memory[prev][human]++
+    // 显示结果
+    document.getElementById("history").innerHTML += `<li>
+            AI:${getName(ai)} vs 人:${getName(human)} = ${getRes(ai,human)}
+        </li>`
+    
+    count++;
+
+    if(count >= 10){
+        predict = 0;
+        if(memory[human][predict] < memory[human][1]) predict = 1
+        if(memory[human][predict] < memory[human][2]) predict = 2
+        console.log("预测下一轮human应该出:",predict)
+        ai = (predict + 2)%3 // ai下一次的情况
+    }
+
+    prev = human
+}
+
+function getName(v){
+    switch (v) {
+        case 0:
+            return "石头"
+        case 1:
+            return "剪刀"
+        default:
+            return "布";
+    }
+}
+
+/*
+0 - 石头
+1 - 剪刀
+2 - 布
+*/ 
+function getRes(ai,human){
+    if(ai === human){
+        return "平局"
+    }else{
+        return "AI:" + ((ai+2)%3 === human ? "负" : "胜")
+    }
+}
+</script>
