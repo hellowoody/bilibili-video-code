@@ -13,8 +13,7 @@
   
  - 案例分析
 
-    ```
-    ```
+    ![image](https://github.com/hellowoody/bilibili-video-code/blob/main/array-sort/img.png?raw=true)
 
 
  > Chrome V8老版本的排序算法是插入排序 和 快速排序  
