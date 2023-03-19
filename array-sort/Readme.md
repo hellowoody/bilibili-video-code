@@ -8,7 +8,7 @@
 
  - TimSort
 
-    维基百科:Timsort 是一种混合稳定的排序算法，源自合并排序(Merge Sort)和插入排序(Insertion Sort)
+    维基百科:Timsort 是一种混合稳定的排序算法，源自合并排序(Merge Sort)和插入排序(Insertion Sort)  
     V8:合并排序(Merge Sort)和插入排序(Binary Insertion Sort)
   
  - 案例分析
